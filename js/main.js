@@ -10,7 +10,11 @@ const firebaseConfig = {
     appId: "1:134801156454:web:6cb3d5efdd5cb5a17a00a7"
 };
 
+// Initialize the firebase app with the Configuration from the App
 firebase.initializeApp(firebaseConfig);
-
-
 console.log(firebase);
+
+// Get a reference to our Realtime Database
+const database = firebase.database();
+
+console.log(database);
