@@ -35,3 +35,12 @@ database.ref().once('value')
         })
 
     })
+
+
+function addHardData(){
+    database.ref('13').set({
+        id: 4321,
+        first_name: 'nairB',
+        last_name: 'notnatS'
+    })
+}
