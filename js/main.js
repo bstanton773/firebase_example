@@ -18,3 +18,20 @@ console.log(firebase);
 const database = firebase.database();
 
 console.log(database);
+
+
+// Read values from the database
+database.ref().once('value')
+    .then(snapshot => snapshot.val())
+    .then(rawData => {
+        console.log(rawData)
+
+        let kekambasList = document.getElementById('kekambas');
+
+        rawData.forEach((arrayItem) => {
+            let firstName = arrayItem.first_name;
+            let lastName = arrayItem.last_name;
+            kekambasList.innerHTML += `<li class='list-group-item'>${firstName} ${lastName}</li>`;
+        })
+
+    })
