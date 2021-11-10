@@ -28,7 +28,7 @@ database.ref().once('value')
 
         let kekambasList = document.getElementById('kekambas');
 
-        rawData.forEach((arrayItem) => {
+        rawData.forEach((arrayItem, index) => {
             let firstName = arrayItem.first_name;
             let lastName = arrayItem.last_name;
             kekambasList.innerHTML += `<li class='list-group-item'>${firstName} ${lastName}</li>`;
@@ -37,10 +37,25 @@ database.ref().once('value')
     })
 
 
-function addHardData(){
-    database.ref('13').set({
-        id: 4321,
-        first_name: 'nairB',
-        last_name: 'notnatS'
+function addData(e){
+    // Stop the event from refreshing the page
+    e.preventDefault();
+    // Get a count of total number of people in the list
+    let personCount = document.getElementsByTagName('li').length
+    
+    // Get the input data from the form
+    const firstName = e.target.firstName.value;
+    const lastName = e.target.lastName.value;
+    
+    // Add new user as the next number in the list with the form data
+    database.ref('users/' + personCount.toString()).set({
+        id: personCount + 1,
+        first_name: firstName,
+        last_name: lastName
     })
+    location.reload();
 }
+
+
+const form = document.getElementById('kekambasForm');
+form.addEventListener('submit', addData)
